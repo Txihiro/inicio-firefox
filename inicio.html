@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Inicio</title>
+<style>
+
+  :root {
+    --bg-start: #1a1a2e;
+    --bg-end: #16213e;
+    --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+    --card-bg: rgba(255, 255, 255, 0.10);
+    --card-border: rgba(255, 255, 255, 0.14);
+    --text-main: #f1f1f1;
+    --text-muted: #cfcfe0;
+    --accent: #7c8cff;
+
+    --text-shadow: 0 1px 2px rgba(0,0,0,0.9), 0 1px 6px rgba(0,0,0,0.6);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://i.pinimg.com/736x/6e/9c/32/6e9c32c6f6ad7289af2c9b8bef155836.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: var(--font-family);
+    color: var(--text-main);
+  }
+
+  .tw-root {
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 16px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tw-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+
+  .tw-greeting {
+    font-size: 15px;
+    font-weight: 500;
+    text-shadow: var(--text-shadow);
+  }
+
+  .tw-clock {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-variant-numeric: tabular-nums;
+    text-shadow: var(--text-shadow);
+  }
+
+  .tw-grid {
+    width: 100%;
+    max-width: 1380px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 240px 1fr 240px;
+    grid-template-rows: repeat(3, auto);
+    column-gap: 35px;
+    row-gap: 12px;
+    align-items: start;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .tw-block:nth-child(1) { grid-column: 1; grid-row: 1; }
+  .tw-block:nth-child(2) { grid-column: 1; grid-row: 2; }
+  .tw-block:nth-child(3) { grid-column: 1; grid-row: 3; }
+
+  .tw-block:nth-child(4) { grid-column: 3; grid-row: 1; }
+  .tw-block:nth-child(5) { grid-column: 3; grid-row: 2; }
+  .tw-block:nth-child(6) { grid-column: 3; grid-row: 3; }
+
+  .tw-block {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 10px 12px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tw-block h2 {
+    margin: 0 0 7px 0;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+    color: var(--text-muted);
+    text-shadow: var(--text-shadow);
+  }
+
+  .tw-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .tw-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 5px 8px;
+    font-size: 13px;
+    text-shadow: var(--text-shadow);
+    transition: background 0.18s ease, transform 0.12s ease, border-color 0.18s ease;
+    cursor: pointer;
+  }
+
+  .tw-link:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .tw-link .tw-emoji { font-size: 14px; line-height: 1; }
+
+  .tw-pomo-time {
+    font-size: 20px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    text-shadow: var(--text-shadow);
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .tw-pomo-btns { display: flex; gap: 6px; justify-content: center; }
+
+  .tw-pomo-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.9);
+    transition: background 0.15s ease;
+  }
+
+  .tw-pomo-btn:hover { background: rgba(255, 255, 255, 0.18); }
+
+</style>
+</head>
+<body>
+
+<div class="tw-root">
+
+  <div class="tw-header">
+    <div class="tw-greeting" id="twGreeting"></div>
+    <div class="tw-clock" id="twClock"></div>
+  </div>
+
+  <div class="tw-grid">
+
+    <!-- ===== HOY ===== -->
+    <div class="tw-block">
+      <h2>Hoy</h2>
+      <div class="tw-links">
+        <a class="tw-link" href="https://ticktick.com" target="_blank"><span class="tw-emoji">📋</span> TickTick</a>
+        <a class="tw-link" href="https://mail.google.com" target="_blank"><span class="tw-emoji">📧</span> Gmail</a>
+        <a class="tw-link" href="file:///C:/Users/Álex/Documents/txihiro-code/cositas.html"><span class="tw-emoji">😺</span> Cositas</a>
+      </div>
+    </div>
+
+    <!-- ===== PREGUNTAR ===== -->
+    <div class="tw-block">
+      <h2>Preguntar</h2>
+      <div class="tw-links">
+        <a class="tw-link" href="https://chat.deepseek.com" target="_blank"><span class="tw-emoji">🤖</span> DeepSeek</a>
+        <a class="tw-link" href="https://gemini.google.com" target="_blank"><span class="tw-emoji">✨</span> Gemini</a>
+        <a class="tw-link" href="https://chat.openai.com" target="_blank"><span class="tw-emoji">💬</span> ChatGPT</a>
+        <a class="tw-link" href="https://claude.ai" target="_blank"><span class="tw-emoji">🧠</span> Claude</a>
+      </div>
+    </div>
+
+    <!-- ===== POMODORO ===== -->
+    <div class="tw-block">
+      <h2>Pomodoro</h2>
+      <div class="tw-pomo-time" id="twPomoTime">20:00</div>
+      <div class="tw-pomo-btns">
+        <button class="tw-pomo-btn" onclick="twPomoStart()">▶</button>
+        <button class="tw-pomo-btn" onclick="twPomoPause()">⏸</button>
+        <button class="tw-pomo-btn" onclick="twPomoReset()">↺</button>
+      </div>
+    </div>
+
+    <!-- ===== ENTRETENIMIENTO ===== -->
+    <div class="tw-block">
+      <h2>Entretenimiento</h2>
+      <div class="tw-links">
+        <a class="tw-link" href="https://www.youtube.com/playlist?list=WL" target="_blank"><span class="tw-emoji">⏯️</span> Ver más tarde</a>
+        <a class="tw-link" href="https://www.youtube.com/playlist?list=PL4NuLDeAFOXRMO966bHVayQanhedd1NsT" target="_blank"><span class="tw-emoji">📌</span> Pendientes</a>
+        <a class="tw-link" href="https://www.youtube.com/playlist?list=PLaOO_rvKxW0U" target="_blank"><span class="tw-emoji">🎬</span> Ali</a>
+        <a class="tw-link" href="https://twitch.tv" target="_blank"><span class="tw-emoji">🎮</span> Twitch</a>
+        <a class="tw-link" href="https://justwatch.com/es" target="_blank"><span class="tw-emoji">🍿</span> JustWatch</a>
+      </div>
+    </div>
+
+    <!-- ===== INFORMACIÓN ===== -->
+    <div class="tw-block">
+      <h2>Información</h2>
+      <div class="tw-links">
+        <a class="tw-link" href="https://eldiario.es" target="_blank"><span class="tw-emoji">📰</span> El Diario</a>
+        <a class="tw-link" href="https://nationalgeographic.es" target="_blank"><span class="tw-emoji">🌍</span> National Geographic</a>
+        <a class="tw-link" href="https://www.aemet.es/es/eltiempo/prediccion/municipios/jerez-de-la-frontera-id11020" target="_blank"><span class="tw-emoji">🌦️</span> AEMET</a>
+      </div>
+    </div>
+
+    <!-- ===== HERRAMIENTAS ===== -->
+    <div class="tw-block">
+      <h2>Herramientas</h2>
+      <div class="tw-links">
+        <a class="tw-link" href="https://notion.so" target="_blank"><span class="tw-emoji">🗂️</span> Notion</a>
+        <a class="tw-link" href="https://deepl.com" target="_blank"><span class="tw-emoji">🌐</span> DeepL</a>
+        <a class="tw-link" href="https://chollometro.com" target="_blank"><span class="tw-emoji">🏷️</span> Chollómetro</a>
+        <a class="tw-link" href="https://aliexpress.com" target="_blank"><span class="tw-emoji">📦</span> AliExpress</a>
+        <a class="tw-link" href="https://amazon.es" target="_blank"><span class="tw-emoji">🛒</span> Amazon</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  function twUpdateHeader() {
+    var now = new Date();
+    var hh = String(now.getHours()).padStart(2, '0');
+    var mm = String(now.getMinutes()).padStart(2, '0');
+    document.getElementById('twClock').textContent = hh + ':' + mm;
+
+    var h = now.getHours();
+    var saludo;
+    if (h >= 6 && h < 13) saludo = 'Buenos días ☀️';
+    else if (h >= 13 && h < 20) saludo = 'Buenas tardes 🌤️';
+    else saludo = 'Buenas noches 🌙';
+    document.getElementById('twGreeting').textContent = saludo;
+  }
+  twUpdateHeader();
+  setInterval(twUpdateHeader, 10000);
+
+  var twPomoSeconds = 20 * 60;
+  var twPomoInterval = null;
+
+  function twPomoRender() {
+    var m = String(Math.floor(twPomoSeconds / 60)).padStart(2, '0');
+    var s = String(twPomoSeconds % 60).padStart(2, '0');
+    document.getElementById('twPomoTime').textContent = m + ':' + s;
+  }
+
+  function twPomoStart() {
+    if (twPomoInterval) return;
+    twPomoInterval = setInterval(function () {
+      if (twPomoSeconds > 0) {
+        twPomoSeconds--;
+        twPomoRender();
+      } else {
+        clearInterval(twPomoInterval);
+        twPomoInterval = null;
+      }
+    }, 1000);
+  }
+
+  function twPomoPause() {
+    clearInterval(twPomoInterval);
+    twPomoInterval = null;
+  }
+
+  function twPomoReset() {
+    twPomoPause();
+    twPomoSeconds = 20 * 60;
+    twPomoRender();
+  }
+
+  twPomoRender();
+</script>
+
+</body>
+</html>
